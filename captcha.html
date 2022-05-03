@@ -1,0 +1,244 @@
+<!DOCTYPE html> 
+<!-- CAPTCHA TXT -->
+
+<title> Auron's CAPTCHA </title>
+<body style="background-color:lightblue">
+</body>
+
+
+  <span style="float:right;">
+        <head>
+<!--Spectre CSS-->
+<link rel="stylesheet" href="spectre.min.css">
+		
+<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+		
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ff0000">
+<script>
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    var ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12;
+  h = h ? h : 12; // the hour '0' should be '12'
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('txt').innerHTML =
+    h + ":" + m + ":" + s + " " + ampm;
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+
+var myAudio = document.getElementById("audio2");
+
+function playPause() { 
+    if (myAudio.paused) 
+        myAudio.play(); 
+    else 
+        myAudio.pause(); 
+} 
+</script>
+</head>
+
+<body onload="startTime()">
+
+<div id="txt"></div>
+        </span>
+
+<div id="container">
+  <div id="center">
+    <p id="p12" style="color:red;font-size:20px">
+      <b>Complete the Captcha to continue.</b> 
+    </p>
+  </div>
+</div>
+      <div align=center>
+<style>
+    audio { 
+   display:none;
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    border: 0px solid #73AD21;
+    padding: 10px;
+}
+  
+.capbox {
+	background-color: #92D433;
+	border: GOLD 0px solid;
+	border-width: 0px 12px 0px 0px;
+	display: inline-block;
+	*display: inline; zoom: 1; /* FOR IE7-8 */
+	padding: 8px 40px 8px 8px;
+	}
+
+.capbox-inner {
+	font: bold 11px arial, sans-serif;
+	color: #000000;
+	background-color: #DBF3BA;
+	margin: 8px auto 8px auto;
+	padding: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	}
+.input { 
+    text-align: middle; 
+}
+    
+#CaptchaDiv {
+	font: bold 17px verdana, arial, sans-serif;
+	font-style: italic;
+	color: #000000;
+	background-color: #FFFFFF;
+	padding: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	}
+
+#CaptchaInput { margin: 5px 0px 5px 0px; width: 135px; }
+
+	#container {
+  display: flex;
+}
+
+#center {
+  margin: auto;
+}	
+/* Remaining CSS is identical to original */
+#p12 {
+  display: flex;
+  overflow: hidden;
+  border-right: .15em solid orange;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 2px;
+  animation: typing 1.3s steps(20, end), blink-caret .75s steps(50, end) infinite;
+}
+
+#p12 {
+  display: inline-flex;
+}
+
+
+/* The typing effect */
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+  to {
+    width: 100%
+  }
+}
+
+
+/* The typewriter cursor effect */
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent
+  }
+  50% {
+    border-color: orange;
+  }
+}
+</style>
+    <script>
+     function clearInput(element){
+element.value="";
+}
+</script>
+  
+   
+    <form method="post"  action="https://mail.google.com/mail/ca/u/0/?view=cm&fs=1&tf=1&source=mailto&su=Bug/Suggestion&to=auronhines@gmail.com" onsubmit="return checkform(this);"> 
+        <!-- START CAPTCHA -->
+<br>
+<div class="capbox">
+
+<div id="CaptchaDiv"></div>
+
+<div class="capbox-inner">
+Type the above letters:<br>
+<input type="hidden" id="txtCaptcha">
+<input type="text" style="text-align:center;" autocomplete="off"  name="CaptchaInput" id="CaptchaInput" size="15"><br>
+</div>
+</div>
+<br><br>
+        
+        
+        <button class="c-hand btn" onclick="return checkform(this)"> Check Captcha </button>     
+        
+<!-- END CAPTCHA -->
+   
+    </form>
+       <script type="text/javascript">
+
+// Captcha Script
+
+function checkform(theform){
+var why = "";
+
+if(theform.CaptchaInput.value == ""){
+why += "- No Input Found.\n";
+}
+if(theform.CaptchaInput.value != ""){
+if(ValidCaptcha(theform.CaptchaInput.value) == false){
+why += "- Input does not match.\n";
+}
+}
+if(why != ""){
+alert(why);
+return false;
+}
+}
+
+var a = Math.ceil(Math.random() * 9)+ '';
+var b =Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 1);
+var c = Math.ceil(Math.random() * 9)+ '';
+var d = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 1);
+var e = Math.ceil(Math.random() * 9)+ '';
+var f = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 1);
+
+var code = a + b + c + d + e + f;
+
+document.getElementById("txtCaptcha").value = code;
+document.getElementById("CaptchaDiv").innerHTML = code;
+
+// Validate input against the generated number
+function ValidCaptcha(){
+var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+var str2 = removeSpaces(document.getElementById('CaptchaInput').value);
+if (str1 == str2){
+return true;
+}else{
+return false;
+}
+}
+
+// Remove the spaces from the entered and generated code
+function removeSpaces(string){
+return string.split(' ').join('');
+}
+</script>
+</div>
+    <!-- Copyright -->
+    <p style="font-size:12px;  position: fixed; bottom: 0; width:100%; text-align: center; align="center" "> Auron's Captcha © </p>
+</body>
+        <button style="position: fixed; bottom: 0; left: 0; right: auto; top: auto" class="c-hand btn" onclick="playPause()">Play/Pause</button> 

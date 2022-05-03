@@ -1,16 +1,402 @@
 <!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <title>Auron's Website</title>
-    <!-- Water CSS 1.2.2 -->
-    <link id='stylesheet' rel='stylesheet' href='css/dark.css'>
-    <meta charset="utf-8">
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
- <header>    
-  <body>
-  <h1 align="center";>Welcome!</h1>
-  <hr>
- </header> 
-   <p>My name is Auron and this is my website! You probably know because this is on github.</p>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<!-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!--Spectre CSS-->
+<link rel="stylesheet" href="spectre.min.css">
+
+  <!-- Favicons -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ff0000">
+
+  <!-- Website Title -->
+  <title>Auron's website</title>
+
+  <!-- 
+    All CSS should be in here.
+    Please don't add any inline styles.
+  -->
+  <style>
+    :root {
+      --background-color: silver;
+      --time-color: darkred;
+      --typewriter-text-color: red;
+      --typewriter-cursor-color: orange;
+      --border-color: darkred;
+      --main-font-color: darkred;
+      --updates-border-color: blue;
+          font-family: Nitw;
+      /* this sets the whole documents margin; set to 0 for none */
+      --wrapper-spacing: 3.4vw; 
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--background-color);
+      /* 
+        Can't adjust surrounding space when using flexbox
+        else it messes up the footer's spacing.
+        Instead adjust --wrapper-spacing variable above.
+      */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      font-size: 1.75vw;
+    }
+
+    #audio1 {
+      display: none;
+    }
+
+    #time {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 1vw 1vw 0 0; /* top right bottom left */
+      color: var(--time-color);
+    }
+
+    header {
+      margin-top: var(--wrapper-spacing);
+      margin-left: var(--wrapper-spacing);
+      margin-right: var(--wrapper-spacing);
+    }
+
+    #typewriter-container {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    #typewriter > h1 {
+      color: var(--typewriter-text-color);
+      overflow: hidden; /* Ensures the content is not revealed until the animation */
+      border-right: 0.5vw solid var(--typewriter-cursor-color); /* The typwriter cursor */
+      white-space: nowrap; /* Keeps the content on a single line */
+      margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+      letter-spacing: 1vw; /* Adjust as needed */
+      font-family: Nitw; /* Font */
+      animation: 
+        typing 0.65s steps(44, end),
+        blink-caret .75s step-end infinite;
+      font-size: 3.5vw;
+    }
+
+    /* The typing effect */
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+
+    /* The typewriter cursor effect */
+    @keyframes blink-caret {
+      from,
+      to {
+        border-color: transparent;
+      }
+      50% {
+        border-color: orange;
+      }
+    }
+
+    header > p {
+      color: blue;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    main {
+      flex-grow: 1;
+      margin-left: var(--wrapper-spacing);
+      margin-right: var(--wrapper-spacing);
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      color: var(--main-font-color);
+    }
+
+    .container > .about > .reactOS, 
+    .container > .about > .channels {
+      /* 
+        margin:
+        first value assigned to both top & bottom; 
+        second value to both left & right.
+        It is a nice short way of writing it
+      */
+      margin: 2vw 0;
+    }
+
+    .container h3 {
+      margin-bottom: 1vw;
+      font-size: 2.5vw;
+    }
+
+    .container p {
+      margin-top: 1vw;
+      font-size: 1.7vw;
+    }
+
+    .suggestions a {
+      display:block;
+      text-align:center;
+      font-size: 1.7vw;
+    }
+
+   a.biglink {
+    font-size: 1.7vw;
+   }
+
+    .updates > ul {
+      border: 0.3vw solid var(--updates-border-color);
+      display: flex;
+      flex-direction: column-reverse;
+      margin-top: 1vw;
+      /* 
+        padding:
+        first value assigned to both top & bottom; 
+        second value to both left & right.
+        It is a nice short way of writing it
+      */
+      padding: 2vw 4vw; 
+    }
+    
+    ul {
+    font-size: 1.5vw;
+   }
+
+    footer {
+      flex-shrink: 0;
+      margin: 0 3vw 3vw 3vw; /* top right bottom left */
+    }
+
+    footer #tag {
+      /* 
+        margin:
+        first value assigned to both top & bottom; 
+        second value to both left & right.
+        It is a nice short way of writing it
+      */
+      margin: 0 auto;
+      padding: 0; /* assigns the same value to all sides */
+      cursor: pointer;
+    }
+           @font-face {
+font-family: Nitw;
+src: url(/Nitw.ttf);
+}
+  </style>
+  <!-- No CSS beyond this line -->
+  
+</head>
+<body>
+
+  <!-- Place all HTML below this line -->
+
+  <!-- Clock -->
+  <div id="time"></div>
+
+  <!-- Header Content -->
+  <header>
+    <div id="typewriter-container">
+      <div id="typewriter">
+        <h1>Welcome to my website!</h1>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <div class="about">
+
+        <!-- About Your Computer -->
+        <div class="build">
+          <h3>Current Build</h3>
+          <p>My Desktop SPECS:</p>
+  
+          <ul>
+            <li>CPU: Intel I7 920  2.67GHZ 4-core</li>
+            <li>RAM: 24 GB DDR3</li>
+            <li>SSD: 232 GB</li>
+            <li>OS: Windows 10 Professional 64-bit</li>
+            <li>SCREEN: 1920 X 1080</li>
+          </ul>
+        </div>
+
+        <!-- Virtualbox -->
+        <div class="reactOS">
+          <h3>Virtualbox</h3>
+          
+          <div> Want to try an OS before installing it? Use 
+            <div class="popover popover-right">
+            <a href="https://www.virtualbox.org/wiki/Downloads" class="btn btn-link biglink">VirtualBox!</a>
+            <div class="popover-container">
+            <div class="card">
+            <div class="card-header">
+            <div class="card-title h5">VirtualBox</div>
+            <div class="card-subtitle text-gray">Virtualization software</div>
+            <div class="card-body">VirtualBox allows additional operating systems to be installed on it, as a Guest OS, and run in a virtual environment.</div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+
+        <!-- Social Media -->
+        <div class="channels">
+          <h3>Channels</h3>
+          <p>My Youtube and Twitch channels!</p>
+
+          <ul>
+            <li>
+              <a href="https://www.youtube.com/channel/UCMF9lXrFi9k4A1EHRKc3-fw" class="btn btn-link tooltip tooltip-right biglink" data-tooltip="My Youtube channel!">Youtube</a>
+            </li>
+            <li>
+              <a href="https://www.twitch.tv/mrmajik45" class="btn btn-link tooltip tooltip-right biglink" data-tooltip="My Twitch channel!">Twitch</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bug Fix or Suggestions -->
+      <div class="suggestions">
+        <h3>Bugs</h3>
+        <p>If you find a bug or have a suggestion, click here:</p> 
+        <a href="captcha.html" class="btn btn-link">Email Link</a>
+      </div>
+
+      <!-- Website Updates -->
+      <div class="updates">
+        <h3>Update List:</h3>
+        <ul>
+          <li> 1.0 Website released! </li>
+          <li> 1.1 Click copyright to hide. </li>
+          <li> 1.3 24 hour clock is now
+              a 12 hour clock. </li>
+          <li> 1.4 Added some animation!</li>
+          <li> 1.5 Minor corrections</li>
+          <li> 1.6 Spectre added (Mobile looks ok)</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer and Tagline -->
+  <footer>
+    <div class="container">
+      <button id="calc1" class="c-hand btn calc">Calculator</button>
+
+      <p id="tag">Auron's website &copy;</p>
+
+      <button id="calc2" class="c-hand btn calc">Calculator</button>
+    </div>
+  </footer>
+
+
+
+  <!-- 
+    All HTML should be above this line.
+    All Javascript code should be placed below here.
+    Following these guidelines helps your website load speed. :)
+  -->
+  <script>
+    // when the page loads call these functions
+    window.onload = function() {
+      startTime()   // clock
+      tagline()     // tagline
+      calculator()  // calc
+    }
+
+    // Clock
+    function startTime() {
+      /* 
+        same checkTime function
+        just add es6 flare :)
+        plus this makes the js for the clock a single function
+      */
+      const checkTime = i => {
+        if (i < 10) {i = '0' + i};  // add zero in front of numbers < 10
+        return i;
+      }
+
+      const today = new Date();
+      let h = today.getHours();
+      let m = today.getMinutes();
+      let s = today.getSeconds();
+
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12;
+      h = h ? h : 12; // the hour '0' should be '12'
+      m = checkTime(m);
+      s = checkTime(s);
+
+      document.getElementById('time').innerHTML = 
+        h + ":" + m + ":" + s + " " + ampm;
+      const t = setTimeout(startTime, 500);
+    }
+
+    // Disappearing Tagline
+    function tagline() {
+      const tag = document.getElementById('tag');
+
+      // creates an onClick listener to the html element
+      tag.addEventListener('click', () => {
+        // sets the opacity transition from 100-0 to be smooth over 500ms
+        tag.style.transition = 'opacity 500ms linear';
+        // triggers the opacity change
+        tag.style.opacity = '0';
+        // removes the html element after the 500ms
+        setTimeout(() => {tag.style.display = 'none'}, 500);
+      });
+    }
+
+    // Calculator
+    function calculator() {
+      const calc1 = document.getElementById('calc1');
+      const calc2 = document.getElementById('calc2');
+
+      // creates an onClick listener to the html element
+      calc1.addEventListener('click', () => {
+        // changes the window url to the page you want to go
+        window.location.href = 'calc.html';
+      });
+    
+    // creates an onClick listener to the html element
+    calc2.addEventListener('click', () => {
+      // changes the window url to the page you want to go
+      window.location.href = 'calc.html';
+    });
+  }
+  </script>
+
+</body>
 </html>
+
